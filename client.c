@@ -45,6 +45,9 @@ int main(int argc, char *argv[]) {
 
     //----------------------------------------------SPOJENIE KLIENTA SO SERVEROM USPESNE--------------------------------------------------
 
+    //TODO zadava pismenka
+    //TODO ak napise koniec - prehral a spojenie so serverom sa ukonci
+
     char buffer[BUFFER_LENGTH + 1];
     buffer[BUFFER_LENGTH] = '\0';
     int koniec = 0;
