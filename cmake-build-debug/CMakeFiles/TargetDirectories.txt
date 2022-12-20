@@ -1,0 +1,3 @@
+C:/Users/mkuruczova/CLionProjects/POS_sem/cmake-build-debug/CMakeFiles/POS_sem.dir
+C:/Users/mkuruczova/CLionProjects/POS_sem/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mkuruczova/CLionProjects/POS_sem/cmake-build-debug/CMakeFiles/rebuild_cache.dir
