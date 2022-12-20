@@ -67,6 +67,29 @@ int main(int argc, char** argv) {
 
     //----------------------------------------------SPOJENIE KLIENTA SO SERVEROM USPESNE--------------------------------------------------
 
+    printf("HRA OBESENEC ZAČALA! VYBRAL SOM SLOVO, KTORÉ MÁŠ UHÁDNUŤ. VEĽA ŠŤASTIA!\n");
+
+    //----------------------------------------------UVODNY VYPIS SERVER--------------------------------------------------
+
+    //TODO vygenerovanie slova z nejakeho zoznamu slov
+    //TODO vypis zostavajucich a pouzitych pismen - z nejakeho pola ?
+    printf("Zostavajuce pismenka: \n");
+    printf("Použite pismenka: \n");
+    //TODO vypis slova kde pismena nahradime za ciarky
+    printf("SLOVO: _ _ _ _ _ _ _ _ _");
+    //TODO vypis aktualneho stavu obesenca
+    printf("------------------\n"
+                  "|           |\n"
+                  "|          ( )\n"
+                  "|         --|--\n"
+                  "|           |\n"
+                  "|          / \\\n"
+                  "|\n"
+                  "|\n"
+                  "------------------\n");
+
+    //TODO cakanie na zadanie pismenka od hraca
+    printf("Zadaj pismenko : ");
 
 
     char buffer[BUFFER_LENGTH + 1];
