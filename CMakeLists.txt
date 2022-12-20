@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.18)
 project(POS_sem C)
 
 set(CMAKE_C_STANDARD 99)
