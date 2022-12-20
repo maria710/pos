@@ -91,6 +91,7 @@ int main(int argc, char** argv) {
     //TODO cakanie na zadanie pismenka od hraca
     printf("Zadaj pismenko : ");
 
+    //new branch commit :)
 
     char buffer[BUFFER_LENGTH + 1];
     buffer[BUFFER_LENGTH] = '\0';
