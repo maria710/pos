@@ -40,10 +40,15 @@ int main(int argc, char *argv[]) {
     if (connect(sock,(struct sockaddr *) &serverAddress, sizeof(serverAddress)) < 0) {
         printError("Chyba - connect.");        
     }
-    
-    printf("Spojenie so serverom bolo nadviazane.\n");
 
     //----------------------------------------------SPOJENIE KLIENTA SO SERVEROM USPESNE--------------------------------------------------
+
+    printf("Spojenie so serverom bolo nadviazane\n");
+    printf("Pre ukončenie spojenia napíš slovo: koniec\n");
+
+    printf("HRA OBESENEC ZAČALA! VYBRAL SOM SLOVO, KTORÉ MÁŠ UHÁDNUŤ. VEĽA ŠŤASTIA!\n");
+
+    //TODO zada pismenko a caka na odpoved od serveru - vlakno ??
 
     char buffer[BUFFER_LENGTH + 1];
     buffer[BUFFER_LENGTH] = '\0';

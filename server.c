@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+#include <time.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -22,6 +22,113 @@ char* spracujData(char *data) {
     }
     return data;
 }
+
+void nakresliObesenca(int zivoty) {
+    switch (zivoty) {
+        case 0:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|         --|--\n"
+                   "|           |\n"
+                   "|          / \\\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 1:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|         --|--\n"
+                   "|           |\n"
+                   "|          / \n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 2:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|         --|--\n"
+                   "|           |\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 3:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|         --|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 4:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 5:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+    }
+}
+
+int getRandomInInterval(int dolnaHranica, int hornaHranica) {
+    return rand() % (hornaHranica - dolnaHranica + 1) + dolnaHranica;
+}
+
+char slova[30][20] = {
+        "JABLKO",
+        "POCITAC",
+        "MALICKOST",
+        "SPORTOVANIE",
+        "PROGRAMATOR",
+        "MANDARINKA",
+        "GRAPEFRUIT",
+        "SLNECNIK",
+        "PALINDROM",
+        "ZEMEGULA",
+        "NARODENINY",
+        "ORIESKY",
+        "VOZIDLO",
+        "CHOBOTNICA",
+        "ZMYJA",
+        "LAMBORGHINI",
+        "PENICILIN",
+        "GRAMOFON",
+        "KOLONOSKOPIA",
+        "OTORINOLARYNGOLOG",
+        "RUKAVICKY",
+        "FATAMORGANA",
+        "UCHO",
+        "VIANOCE",
+        "SILVESTER",
+        "PIROHY",
+        "PYROTECHNIKA",
+        "KLAMPIAR",
+        "BLESKOZVOD",
+        "SLIVKY"};
 
 int main(int argc, char** argv) {
     if (argc < 2) {
@@ -67,29 +174,25 @@ int main(int argc, char** argv) {
 
     //----------------------------------------------SPOJENIE KLIENTA SO SERVEROM USPESNE--------------------------------------------------
 
-    printf("HRA OBESENEC ZAČALA! VYBRAL SOM SLOVO, KTORÉ MÁŠ UHÁDNUŤ. VEĽA ŠŤASTIA!\n");
-
     //----------------------------------------------UVODNY VYPIS SERVER--------------------------------------------------
 
-    //TODO vygenerovanie slova z nejakeho zoznamu slov
+    //TODO vygenerovanie slova z nejakeho zoznamu slov (index od 0 - 29)
+    srand(time(NULL));
+    int randomIndex = getRandomInInterval(0,29);
+    char* slovo = slova[randomIndex];
+    printf("Vygenerovane slovo : %s\n", slovo);
+
+    //toto ma byt v inej casti kodu
     //TODO vypis zostavajucich a pouzitych pismen - z nejakeho pola ?
     printf("Zostavajuce pismenka: \n");
     printf("Použite pismenka: \n");
     //TODO vypis slova kde pismena nahradime za ciarky
     printf("SLOVO: _ _ _ _ _ _ _ _ _");
     //TODO vypis aktualneho stavu obesenca
-    printf("------------------\n"
-                  "|           |\n"
-                  "|          ( )\n"
-                  "|         --|--\n"
-                  "|           |\n"
-                  "|          / \\\n"
-                  "|\n"
-                  "|\n"
-                  "------------------\n");
+    nakresliObesenca(5);
 
-    //TODO cakanie na zadanie pismenka od hraca
-    printf("Zadaj pismenko : ");
+    //TODO cakanie na zadanie pismenka od hraca - vlakno ???
+    printf("Zadaj pismenko : \n");
 
     //new branch commit :)
 
@@ -100,7 +203,7 @@ int main(int argc, char** argv) {
         //citanie dat zo socketu <unistd.h>
 		read(clientSocket, buffer, BUFFER_LENGTH);
         if (strcmp(buffer, endMsg) != 0) {
-            printf("Klient poslal nasledujuce data:\n%s\n", buffer);
+            printf("Klient zadal pismenko:\n%s\n", buffer);
             spracujData(buffer);
 			//zapis dat do socketu <unistd.h>
 			write(clientSocket, buffer, strlen(buffer) + 1);
@@ -116,3 +219,4 @@ int main(int argc, char** argv) {
     
     return (EXIT_SUCCESS);
 }
+
