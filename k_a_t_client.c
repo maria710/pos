@@ -10,6 +10,9 @@
 #include <unistd.h>
 #include <pthread.h>
 
+
+
+
 int main(int argc, char *argv[]) {
     if (argc < 4) {
         printError("Klienta je nutne spustit s nasledujucimi argumentmi: adresa port pouzivatel.");
@@ -45,8 +48,10 @@ int main(int argc, char *argv[]) {
 
     //-------------------SPOJENIE NADVIAZANE------------------------
 
-    printf("HRA OBESENEC ZAČALA! ČAKÁM KÝM DRUHÝ HRÁČ VYMYSLÍ SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
+    printf("\n***********************************************\n\n");
+    printf("HRA OBESENEC ZAČALA! DRUHÝ HRÁČ VYMYSLEL SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
     printf("Pre ukončenie napíš: koniec\n");
+
 
 	//inicializacia dat zdielanych medzi vlaknami
     DATA data;

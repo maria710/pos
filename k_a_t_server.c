@@ -52,6 +52,7 @@ int main(int argc, char *argv[]) {
 
     //-------------------SPOJENIE NADVIAZANE------------------------
 
+    printf("\n***********************************************\n\n");
     printf("HRA OBESENEC ZAČALA! VYMYSLI SLOVO, KTORÉ BUDE TVOJ OPONENT HÁDAŤ! \n");
     printf("Pre ukončenie napíš: koniec\n");
     char slovo[100];

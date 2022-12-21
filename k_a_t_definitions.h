@@ -16,6 +16,10 @@ typedef struct data {
     pthread_mutex_t mutex;
     int socket;
     int stop;
+
+    int uhadnute;
+    int zivoty;
+    char pismeno;
 } DATA;
 
 void data_init(DATA *data, const char* userName, const int socket);
