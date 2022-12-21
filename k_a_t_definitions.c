@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-char *endMsg = ":end";
+char *endMsg = "koniec";
 
 void data_init(DATA *data, const char* userName, const int socket) {
 	data->socket = socket;
@@ -62,11 +62,24 @@ void *data_readData(void *data) {
 	return NULL;
 }
 
-void *data_writeData(void *data) {    
+void *data_writeData(void *data) {
+
+
     DATA *pdata = (DATA *)data;
     char buffer[BUFFER_LENGTH + 1];
 	buffer[BUFFER_LENGTH] = '\0';
 	int userNameLength = strlen(pdata->userName);
+
+    if(strcmp(pdata->userName, "klient") == 0) {
+        //printf("HRA OBESENEC ZAČALA! ČAKÁM KÝM DRUHÝ HRÁČ VYMYSLÍ SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
+        //printf("Pre ukončenie napíš: koniec\n");
+    } else {
+        //printf("HRA OBESENEC ZAČALA! VYMYSLI SLOVO, KTORÉ BUDE TVOJ OPONENT HÁDAŤ : \n");
+        //printf("Pre ukončenie napíš: koniec\n");
+//        char slovo[100];
+//        scanf("Vymyslené slovo: %s", slovo);
+//        printf("Tvoj oponent háda slovo: %s", slovo);
+    }
 
 	//pre pripad, ze chceme poslat viac dat, ako je kapacita buffra
 	fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL, 0) | O_NONBLOCK);
@@ -79,14 +92,24 @@ void *data_writeData(void *data) {
 		FD_SET(STDIN_FILENO, &inputs);
 		select(STDIN_FILENO + 1, &inputs, NULL, NULL, &tv);
 		if (FD_ISSET(STDIN_FILENO, &inputs)) {
-			sprintf(buffer, "%s: ", pdata->userName);
-			char *textStart = buffer + (userNameLength + 2);
-			while (fgets(textStart, BUFFER_LENGTH - (userNameLength + 2), stdin) > 0) {
+
+            int lengthOfName = userNameLength;
+            if(strcmp(pdata->userName, "klient") == 0) {
+                sprintf(buffer, "%s zadal pismenko: ", pdata->userName);
+                lengthOfName += 17;
+            } else {
+                sprintf(buffer, "%s odpovedal: ", pdata->userName);
+                lengthOfName += 12;
+            }
+
+			char *textStart = buffer + lengthOfName;
+			while (fgets(textStart, BUFFER_LENGTH - (lengthOfName), stdin) > 0) {
 				char *pos = strchr(textStart, '\n');
 				if (pos != NULL) {
 					*pos = '\0';
 				}
-				write(pdata->socket, buffer, strlen(buffer) + 1);
+
+                write(pdata->socket, buffer, strlen(buffer) + 1);
 				
 				if (strstr(textStart, endMsg) == textStart && strlen(textStart) == strlen(endMsg)) {
 					printf("Koniec komunikacie.\n");

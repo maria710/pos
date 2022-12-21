@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -41,14 +42,20 @@ int main(int argc, char *argv[]) {
     if (connect(sock,(struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0) {
         printError("Chyba - connect.");        
     }
-    
+
+    //-------------------SPOJENIE NADVIAZANE------------------------
+
+    printf("HRA OBESENEC ZAČALA! ČAKÁM KÝM DRUHÝ HRÁČ VYMYSLÍ SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
+    printf("Pre ukončenie napíš: koniec\n");
+
 	//inicializacia dat zdielanych medzi vlaknami
     DATA data;
 	data_init(&data, userName, sock);
-	
-	//vytvorenie vlakna pre zapisovanie dat do socketu <pthread.h>
+
+    //vytvorenie vlakna pre zapisovanie dat do socketu <pthread.h>
     pthread_t thread;
     pthread_create(&thread, NULL, data_writeData, (void *)&data);
+
 
 	//v hlavnom vlakne sa bude vykonavat citanie dat zo socketu
 	data_readData((void *)&data);
