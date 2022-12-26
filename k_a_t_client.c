@@ -10,24 +10,18 @@
 #include <unistd.h>
 #include <pthread.h>
 
-
-
-
-int main(int argc, char *argv[]) {
+int client(int argc, char *argv[]) {
     if (argc < 4) {
         printError("Klienta je nutne spustit s nasledujucimi argumentmi: adresa port pouzivatel.");
     }
     
     //ziskanie adresy a portu servera <netdb.h>
-    struct hostent *server = gethostbyname(argv[1]);
+    struct hostent *server = gethostbyname(argv[2]);
     if (server == NULL) {
         printError("Server neexistuje.");
     }
-    int port = atoi(argv[2]);
-	if (port <= 0) {
-		printError("Port musi byt cele cislo vacsie ako 0.");
-	}
-    char *userName = argv[3];
+    int port = atoi(argv[3]);
+    char *userName = argv[4];
     
     //vytvorenie socketu <sys/socket.h>
     int sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -35,7 +29,7 @@ int main(int argc, char *argv[]) {
         printError("Chyba - socket.");        
     }
     
-    //definovanie adresy servera <arpa/inet.h>
+    //definovanie adresy servera <arpa/inet.h>, na aky server sa idem pripajat
     struct sockaddr_in serverAddress;
     bzero((char *)&serverAddress, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;

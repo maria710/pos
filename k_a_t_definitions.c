@@ -129,24 +129,22 @@ void *data_readData(void *data) {
         } else {
             //printf("Hrac zadal pismeno: %c, pismeno PATRI do slova.\n", pdata->pismeno);
         }
-		bzero(buffer, BUFFER_LENGTH);
+        bzero(buffer, BUFFER_LENGTH);
 
         if (read(pdata->socket, buffer, BUFFER_LENGTH) > 0) {
-			char *posSemi = strchr(buffer, ':');
-			char *pos = strstr(posSemi + 1, endMsg);
-			if (pos != NULL && pos - posSemi == 2 && *(pos + strlen(endMsg)) == '\0') {
-				*(pos - 2) = '\0';
-				printf("Pouzivatel %s ukoncil komunikaciu.\n", buffer);
-				data_stop(pdata);
-			}
-			else {
-				printf("%s\n", buffer);
-			}			
-		}
-		else {
-			data_stop(pdata);
-		}
-	}
+            char *posSemi = strchr(buffer, ':');
+            char *pos = strstr(posSemi + 1, endMsg);
+            if (pos != NULL && pos - posSemi == 2 && *(pos + strlen(endMsg)) == '\0') {
+                *(pos - 2) = '\0';
+                printf("Pouzivatel %s ukoncil komunikaciu.\n", buffer);
+                data_stop(pdata);
+            } else {
+                printf("%s\n", buffer);
+            }
+        } else {
+            data_stop(pdata);
+        }
+    }
 	
 	return NULL;
 }

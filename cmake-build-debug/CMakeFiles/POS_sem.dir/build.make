@@ -62,10 +62,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.bk4A00oOuL
+CMAKE_SOURCE_DIR = /tmp/tmp.eCeO3x4NnW
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.bk4A00oOuL/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.eCeO3x4NnW/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/POS_sem.dir/depend.make
@@ -78,28 +78,73 @@ include CMakeFiles/POS_sem.dir/flags.make
 
 CMakeFiles/POS_sem.dir/main.c.o: CMakeFiles/POS_sem.dir/flags.make
 CMakeFiles/POS_sem.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.bk4A00oOuL/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/POS_sem.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/POS_sem.dir/main.c.o -c /tmp/tmp.bk4A00oOuL/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.eCeO3x4NnW/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/POS_sem.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/POS_sem.dir/main.c.o -c /tmp/tmp.eCeO3x4NnW/main.c
 
 CMakeFiles/POS_sem.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS_sem.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.bk4A00oOuL/main.c > CMakeFiles/POS_sem.dir/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.eCeO3x4NnW/main.c > CMakeFiles/POS_sem.dir/main.c.i
 
 CMakeFiles/POS_sem.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS_sem.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.bk4A00oOuL/main.c -o CMakeFiles/POS_sem.dir/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.eCeO3x4NnW/main.c -o CMakeFiles/POS_sem.dir/main.c.s
+
+CMakeFiles/POS_sem.dir/k_a_t_client.c.o: CMakeFiles/POS_sem.dir/flags.make
+CMakeFiles/POS_sem.dir/k_a_t_client.c.o: ../k_a_t_client.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.eCeO3x4NnW/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/POS_sem.dir/k_a_t_client.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/POS_sem.dir/k_a_t_client.c.o -c /tmp/tmp.eCeO3x4NnW/k_a_t_client.c
+
+CMakeFiles/POS_sem.dir/k_a_t_client.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS_sem.dir/k_a_t_client.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.eCeO3x4NnW/k_a_t_client.c > CMakeFiles/POS_sem.dir/k_a_t_client.c.i
+
+CMakeFiles/POS_sem.dir/k_a_t_client.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS_sem.dir/k_a_t_client.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.eCeO3x4NnW/k_a_t_client.c -o CMakeFiles/POS_sem.dir/k_a_t_client.c.s
+
+CMakeFiles/POS_sem.dir/k_a_t_server.c.o: CMakeFiles/POS_sem.dir/flags.make
+CMakeFiles/POS_sem.dir/k_a_t_server.c.o: ../k_a_t_server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.eCeO3x4NnW/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/POS_sem.dir/k_a_t_server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/POS_sem.dir/k_a_t_server.c.o -c /tmp/tmp.eCeO3x4NnW/k_a_t_server.c
+
+CMakeFiles/POS_sem.dir/k_a_t_server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS_sem.dir/k_a_t_server.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.eCeO3x4NnW/k_a_t_server.c > CMakeFiles/POS_sem.dir/k_a_t_server.c.i
+
+CMakeFiles/POS_sem.dir/k_a_t_server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS_sem.dir/k_a_t_server.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.eCeO3x4NnW/k_a_t_server.c -o CMakeFiles/POS_sem.dir/k_a_t_server.c.s
+
+CMakeFiles/POS_sem.dir/k_a_t_definitions.c.o: CMakeFiles/POS_sem.dir/flags.make
+CMakeFiles/POS_sem.dir/k_a_t_definitions.c.o: ../k_a_t_definitions.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.eCeO3x4NnW/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/POS_sem.dir/k_a_t_definitions.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/POS_sem.dir/k_a_t_definitions.c.o -c /tmp/tmp.eCeO3x4NnW/k_a_t_definitions.c
+
+CMakeFiles/POS_sem.dir/k_a_t_definitions.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS_sem.dir/k_a_t_definitions.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.eCeO3x4NnW/k_a_t_definitions.c > CMakeFiles/POS_sem.dir/k_a_t_definitions.c.i
+
+CMakeFiles/POS_sem.dir/k_a_t_definitions.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS_sem.dir/k_a_t_definitions.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.eCeO3x4NnW/k_a_t_definitions.c -o CMakeFiles/POS_sem.dir/k_a_t_definitions.c.s
 
 # Object files for target POS_sem
 POS_sem_OBJECTS = \
-"CMakeFiles/POS_sem.dir/main.c.o"
+"CMakeFiles/POS_sem.dir/main.c.o" \
+"CMakeFiles/POS_sem.dir/k_a_t_client.c.o" \
+"CMakeFiles/POS_sem.dir/k_a_t_server.c.o" \
+"CMakeFiles/POS_sem.dir/k_a_t_definitions.c.o"
 
 # External object files for target POS_sem
 POS_sem_EXTERNAL_OBJECTS =
 
 POS_sem: CMakeFiles/POS_sem.dir/main.c.o
+POS_sem: CMakeFiles/POS_sem.dir/k_a_t_client.c.o
+POS_sem: CMakeFiles/POS_sem.dir/k_a_t_server.c.o
+POS_sem: CMakeFiles/POS_sem.dir/k_a_t_definitions.c.o
 POS_sem: CMakeFiles/POS_sem.dir/build.make
 POS_sem: CMakeFiles/POS_sem.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.bk4A00oOuL/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable POS_sem"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.eCeO3x4NnW/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable POS_sem"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/POS_sem.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -112,6 +157,6 @@ CMakeFiles/POS_sem.dir/clean:
 .PHONY : CMakeFiles/POS_sem.dir/clean
 
 CMakeFiles/POS_sem.dir/depend:
-	cd /tmp/tmp.bk4A00oOuL/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.bk4A00oOuL /tmp/tmp.bk4A00oOuL /tmp/tmp.bk4A00oOuL/cmake-build-debug /tmp/tmp.bk4A00oOuL/cmake-build-debug /tmp/tmp.bk4A00oOuL/cmake-build-debug/CMakeFiles/POS_sem.dir/DependInfo.cmake --color=$(COLOR)
+	cd /tmp/tmp.eCeO3x4NnW/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.eCeO3x4NnW /tmp/tmp.eCeO3x4NnW /tmp/tmp.eCeO3x4NnW/cmake-build-debug /tmp/tmp.eCeO3x4NnW/cmake-build-debug /tmp/tmp.eCeO3x4NnW/cmake-build-debug/CMakeFiles/POS_sem.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/POS_sem.dir/depend
 
