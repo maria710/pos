@@ -1,4 +1,5 @@
 #include "k_a_t_definitions.h"
+#include "k_a_t_server.h"
 
 #include <stdlib.h>
 #include <string.h>
