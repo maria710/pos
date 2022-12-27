@@ -6,6 +6,46 @@
 
 #IncludeRegexTransform: 
 
+/tmp/tmp.eCeO3x4NnW/k_a_t_client.c
+k_a_t_definitions.h
+/tmp/tmp.eCeO3x4NnW/k_a_t_definitions.h
+k_a_t_client.h
+/tmp/tmp.eCeO3x4NnW/k_a_t_client.h
+stdlib.h
+-
+string.h
+-
+stdio.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+netdb.h
+-
+unistd.h
+-
+pthread.h
+-
+
+/tmp/tmp.eCeO3x4NnW/k_a_t_client.h
+
+/tmp/tmp.eCeO3x4NnW/k_a_t_definitions.c
+k_a_t_definitions.h
+/tmp/tmp.eCeO3x4NnW/k_a_t_definitions.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+errno.h
+-
+unistd.h
+-
+fcntl.h
+-
+
 /tmp/tmp.eCeO3x4NnW/k_a_t_definitions.h
 pthread.h
 -
@@ -13,6 +53,8 @@ pthread.h
 /tmp/tmp.eCeO3x4NnW/k_a_t_server.c
 k_a_t_definitions.h
 /tmp/tmp.eCeO3x4NnW/k_a_t_definitions.h
+k_a_t_server.h
+/tmp/tmp.eCeO3x4NnW/k_a_t_server.h
 stdlib.h
 -
 string.h
@@ -27,4 +69,6 @@ unistd.h
 -
 pthread.h
 -
+
+/tmp/tmp.eCeO3x4NnW/k_a_t_server.h
 

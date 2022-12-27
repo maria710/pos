@@ -6,6 +6,7 @@
 #define POS_SEM_K_A_T_SERVER_H
 
 int server(int argc, char *argv[]);
+void serverHra(int clientSocket);
 
 
 #endif //POS_SEM_K_A_T_SERVER_H

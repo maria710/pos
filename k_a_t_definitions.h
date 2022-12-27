@@ -22,6 +22,7 @@ typedef struct data {
     char pismeno;
 } DATA;
 
+void nakresliObesenca(int zivoty);
 void data_init(DATA *data, const char* userName, const int socket);
 void data_destroy(DATA *data);
 void data_stop(DATA *data);

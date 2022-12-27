@@ -5,7 +5,6 @@
 
 int main(int argc, char* argv[]) {
 
-
     if(strcmp(argv[1], "server") == 0) {
         return server(argc, argv);
     } else if (strcmp(argv[1], "client") == 0) {

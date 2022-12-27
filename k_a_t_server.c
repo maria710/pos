@@ -15,7 +15,6 @@ int server(int argc, char *argv[]) {
         printError("Sever je nutne spustit s nasledujucimi argumentmi: port pouzivatel.");
     }
     int port = atoi(argv[2]);
-    char *userName = argv[3];
 
     //vytvorenie TCP socketu <sys/socket.h>
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0); //TCP sockety
@@ -51,13 +50,68 @@ int server(int argc, char *argv[]) {
 
     //-------------------SPOJENIE NADVIAZANE------------------------
 
+    serverHra(clientSocket);
+
+    //uzavretie socketu klienta <unistd.h>
+    close(clientSocket);
+
+    return (EXIT_SUCCESS);
+}
+
+void serverHra(int clientSocket) {
+
+    //char *userName = argv[3];
+    char *userName = "server"; //TODO je potrebny username?
+    int pocetZivotov = 5;
+
     printf("\n***********************************************\n\n");
     printf("HRA OBESENEC ZAČALA! VYMYSLI SLOVO, KTORÉ BUDE TVOJ OPONENT HÁDAŤ! \n");
     printf("Pre ukončenie napíš: koniec\n");
-    char slovo[100];
+    char slovo[20];
     printf("Vymyslené slovo: ");
-    scanf("%s", slovo);
+    fgets(slovo, 20, stdin);
     printf("Tvoj oponent háda slovo: %s\n", slovo);
+
+    int dlzkaSlova = strlen(slovo) - 1; //dzka slova - ukoncovaci znak
+    strtok(slovo, "\n"); // odstrani new line z konca slova
+    printf("Dlzka slova je: %d\n", dlzkaSlova);
+
+    char hadaneSlovo[dlzkaSlova];
+    for(int i = 0; i < dlzkaSlova; i++) {
+        hadaneSlovo[i] = "_";
+    }
+
+    write(clientSocket, hadaneSlovo, sizeof(hadaneSlovo)); // odoslanie klientovi
+    char buffer[2];
+
+    for (;;) {
+        int uhadol = 0;
+        int pocetUhadnutych = 0;
+
+        read(clientSocket, buffer, sizeof(buffer));
+        printf("Hrac zadal pismemo: %c, \n", buffer[0]);
+
+        for (int i = 0; i < dlzkaSlova; ++i) {
+            if(slovo[i] == buffer[0]) {
+                hadaneSlovo[i] = buffer[0];
+                uhadol = 1;
+                pocetUhadnutych++;
+                break;
+            }
+        }
+
+        if(!uhadol) {
+            pocetZivotov--;
+        }
+        char a = pocetUhadnutych + '0'; //kokotina
+        buffer[0] = a;
+        write(clientSocket, buffer, sizeof(buffer));
+
+        if(pocetUhadnutych == dlzkaSlova) {
+            printf("Uhadol si cele slovo! ");
+            break;
+        }
+    }
 
     //inicializacia dat zdielanych medzi vlaknami
     DATA data;
@@ -67,16 +121,10 @@ int server(int argc, char *argv[]) {
     pthread_t thread;
     pthread_create(&thread, NULL, data_writeData, (void *) &data);
 
-
     //v hlavnom vlakne sa bude vykonavat citanie dat zo socketu
     data_readData((void *) &data);
 
     //pockame na skoncenie zapisovacieho vlakna <pthread.h>
     pthread_join(thread, NULL);
     data_destroy(&data);
-
-    //uzavretie socketu klienta <unistd.h>
-    close(clientSocket);
-
-    return (EXIT_SUCCESS);
 }
