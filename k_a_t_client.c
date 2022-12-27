@@ -11,6 +11,131 @@
 #include <unistd.h>
 #include <pthread.h>
 
+void nakresliObesenca(int zivoty) {
+    switch (zivoty) {
+        case 0:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|         --|--\n"
+                   "|           |\n"
+                   "|          / \\\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 1:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|         --|--\n"
+                   "|           |\n"
+                   "|          / \n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 2:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|         --|--\n"
+                   "|           |\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 3:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|         --|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 4:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|          ( )\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+        case 5:
+            printf("------------------\n"
+                   "|           |\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "|\n"
+                   "------------------\n");
+            break;
+    }
+}
+
+void * clientHra(void * data) {
+    DATA *d = (DATA * )data;
+
+    printf("\n***********************************************\n\n");
+    printf("HRA OBESENEC ZAČALA! DRUHÝ HRÁČ VYMYSLEL SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
+    printf("Pre ukončenie napíš: koniec\n");
+
+    char buffer[2];
+    char hadaneSlovo[5];
+
+    int pocetZivotov;
+
+
+    read(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
+
+    while (1 == 1) {
+        char pismenko = ' ';
+        printf("\n\n");
+        int koniec = 1;
+
+        for (int i = 0; i < sizeof(hadaneSlovo); ++i) {
+            if(hadaneSlovo[i] == '_') {
+                koniec = 0;
+            }
+            printf("%c", hadaneSlovo[i]);
+        }
+        printf("\n");
+
+        if(koniec == 1) {
+            printf("Vyhral si!\n");
+            break;
+        }
+
+        printf("\n");
+        printf("Zadaj jedno pismenko: \n");
+        scanf("%c", &pismenko);
+        buffer[0] = pismenko;
+        write(d->socket, buffer, sizeof(buffer));
+        read(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
+
+        int zivoty[2];
+        read(d->socket, zivoty, sizeof (zivoty));
+        pocetZivotov = zivoty[0];
+        printf("Pocet zivotov je: %d\n", pocetZivotov);
+        nakresliObesenca(pocetZivotov);
+
+        if (pocetZivotov == 0) {
+            printf("Prehral si!\n");
+            break;
+        }
+    }
+}
+
+
 int client(int argc, char *argv[]) {
     if (argc < 4) {
         printError("Klienta je nutne spustit s nasledujucimi argumentmi: adresa port pouzivatel.");
@@ -43,22 +168,14 @@ int client(int argc, char *argv[]) {
 
     //-------------------SPOJENIE NADVIAZANE------------------------
 
-    printf("\n***********************************************\n\n");
-    printf("HRA OBESENEC ZAČALA! DRUHÝ HRÁČ VYMYSLEL SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
-    printf("Pre ukončenie napíš: koniec\n");
-
-
 	//inicializacia dat zdielanych medzi vlaknami
-    DATA data;
-	data_init(&data, userName, sock);
+    DATA data = {
+           sock
+    };
 
     //vytvorenie vlakna pre zapisovanie dat do socketu <pthread.h>
     pthread_t thread;
-    pthread_create(&thread, NULL, data_writeData, (void *)&data);
-
-
-	//v hlavnom vlakne sa bude vykonavat citanie dat zo socketu
-	data_readData((void *)&data);
+    pthread_create(&thread, NULL, &clientHra, &data);
 
 	//pockame na skoncenie zapisovacieho vlakna <pthread.h>
 	pthread_join(thread, NULL);
