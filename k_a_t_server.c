@@ -17,15 +17,16 @@ void *serverHra(void *data) {
 
     int pocetZivotov = 5;
 
-    printf("\n***********************************************\n\n");
+    printf("\n**************************************************************************\n");
     printf("HRA OBESENEC ZAČALA! VYMYSLI SLOVO, KTORÉ BUDE TVOJ OPONENT HÁDAŤ! \n");
-    printf("Pre ukončenie napíš: koniec\n");
+    printf("**************************************************************************\n\n");
+
+
     char slovo[20];
     printf("Vymyslené slovo: ");
     fgets(slovo, 20, stdin);
     printf("Tvoj oponent háda slovo: %s\n", slovo);
-
-    int dlzkaSlova = strlen(slovo) - 1; //dzka slova - ukoncovaci znak
+    int dlzkaSlova = strlen(slovo) - 1; //dlzka slova - ukoncovaci znak
     strtok(slovo, "\n"); // odstrani new line z konca slova
     printf("Dlzka slova je: %d\n", dlzkaSlova);
 
@@ -34,15 +35,17 @@ void *serverHra(void *data) {
         hadaneSlovo[i] = '_';
     }
 
+    write(d->socket,&dlzkaSlova, sizeof(dlzkaSlova));
     write(d->socket, hadaneSlovo, sizeof(hadaneSlovo)); // odoslanie klientovi
     char buffer[2];
     int pocetUhadnutych = 0;
 
     while(1 == 1) {
         int uhadol = 0;
+        bzero(buffer, sizeof(buffer));
 
         read(d->socket, buffer, sizeof(buffer));
-        printf("Hrac zadal pismemo: %c \n", buffer[0]);
+        printf("Hrac zadal pismenko: %c ", buffer[0]);
 
         for (int i = 0; i < dlzkaSlova; ++i) {
             if(slovo[i] == buffer[0]) {
@@ -51,6 +54,11 @@ void *serverHra(void *data) {
                 pocetUhadnutych++;
             }
         }
+        if(uhadol == 1) {
+            printf(", pismenko sa v slove NACHADZA.      ");
+        } else {
+            printf(", pismenko sa v slove NENACHADZA.    ");
+        }
         printf("Pocet uhadnutych: %d\n", pocetUhadnutych);
         write(d->socket, hadaneSlovo, sizeof(hadaneSlovo)); // odoslanie klientovi
 
@@ -58,17 +66,14 @@ void *serverHra(void *data) {
             pocetZivotov--;
         }
 
-        int zivoty[2];
-        zivoty[0] = pocetZivotov;
-        //buffer[0] = a;
-        write(d->socket, zivoty, sizeof(zivoty));
+        write(d->socket, &pocetZivotov, sizeof(pocetZivotov));
 
         if(pocetUhadnutych == dlzkaSlova) {
-            printf("Uhadol cele slovo! Prehral si.");
+            printf("Uhadol cele slovo! Prehral si.\n");
         }
 
         if(pocetZivotov <= 0 ) {
-            printf("Dosli mu zivoty. Vyhral si!");
+            printf("Dosli mu zivoty. Vyhral si!\n");
             break;
         }
     }
@@ -114,8 +119,7 @@ int server(int argc, char *argv[]) {
 
     //-------------------SPOJENIE NADVIAZANE------------------------
 
-    char *userName = argv[3];
-    //inicializacia dat zdielanych medzi vlaknami
+    //inicializacia dat - socket
     DATA data = {
             clientSocket
     };

@@ -83,22 +83,28 @@ void nakresliObesenca(int zivoty) {
 }
 
 void * clientHra(void * data) {
+
     DATA *d = (DATA * )data;
 
-    printf("\n***********************************************\n\n");
-    printf("HRA OBESENEC ZAČALA! DRUHÝ HRÁČ VYMYSLEL SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
-    printf("Pre ukončenie napíš: koniec\n");
+    printf("\n**************************************************************************\n");
+    printf("HRA OBESENEC ZAČALA! DRUHÝ HRÁČ VYMÝŠĽA SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
+    printf("**************************************************************************\n\n");
 
     char buffer[2];
-    char hadaneSlovo[5];
 
+    int dlzkaSlova;
+    read(d->socket, &dlzkaSlova, sizeof(dlzkaSlova));
+    printf("Dlzka slova je %d", dlzkaSlova);
+
+    char hadaneSlovo[dlzkaSlova];
     int pocetZivotov;
-
 
     read(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
 
     while (1 == 1) {
-        char pismenko = ' ';
+
+        bzero(buffer, sizeof(buffer));
+        char pismenko;
         printf("\n\n");
         int koniec = 1;
 
@@ -116,15 +122,14 @@ void * clientHra(void * data) {
         }
 
         printf("\n");
-        printf("Zadaj jedno pismenko: \n");
-        scanf("%c", &pismenko);
+        printf("Zadaj jedno pismenko: ");
+        scanf(" %c", &pismenko);
+
         buffer[0] = pismenko;
         write(d->socket, buffer, sizeof(buffer));
         read(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
 
-        int zivoty[2];
-        read(d->socket, zivoty, sizeof (zivoty));
-        pocetZivotov = zivoty[0];
+        read(d->socket, &pocetZivotov, sizeof (pocetZivotov));
         printf("Pocet zivotov je: %d\n", pocetZivotov);
         nakresliObesenca(pocetZivotov);
 
@@ -137,7 +142,7 @@ void * clientHra(void * data) {
 
 
 int client(int argc, char *argv[]) {
-    if (argc < 4) {
+    if (argc < 3) {
         printError("Klienta je nutne spustit s nasledujucimi argumentmi: adresa port pouzivatel.");
     }
     
@@ -147,7 +152,6 @@ int client(int argc, char *argv[]) {
         printError("Server neexistuje.");
     }
     int port = atoi(argv[3]);
-    char *userName = argv[4];
     
     //vytvorenie socketu <sys/socket.h>
     int sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -168,7 +172,7 @@ int client(int argc, char *argv[]) {
 
     //-------------------SPOJENIE NADVIAZANE------------------------
 
-	//inicializacia dat zdielanych medzi vlaknami
+	//inicializacia dat - socket
     DATA data = {
            sock
     };

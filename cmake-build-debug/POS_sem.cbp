@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/tmp/tmp.eCeO3x4NnW/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.ybJcPHKH9C/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/tmp/tmp.eCeO3x4NnW/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.ybJcPHKH9C/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/tmp/tmp.eCeO3x4NnW/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.ybJcPHKH9C/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="POS_sem">
-				<Option output="/tmp/tmp.eCeO3x4NnW/cmake-build-debug/POS_sem" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.eCeO3x4NnW/cmake-build-debug"/>
+				<Option output="/tmp/tmp.ybJcPHKH9C/cmake-build-debug/POS_sem" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.ybJcPHKH9C/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -50,15 +50,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 POS_sem"/>
-					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 POS_sem"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="POS_sem/fast">
-				<Option output="/tmp/tmp.eCeO3x4NnW/cmake-build-debug/POS_sem" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.eCeO3x4NnW/cmake-build-debug"/>
+				<Option output="/tmp/tmp.ybJcPHKH9C/cmake-build-debug/POS_sem" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.ybJcPHKH9C/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -69,35 +69,35 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 POS_sem/fast"/>
-					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.eCeO3x4NnW/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 POS_sem/fast"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/tmp/tmp.ybJcPHKH9C/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/tmp/tmp.eCeO3x4NnW/k_a_t_client.c">
+		<Unit filename="/tmp/tmp.ybJcPHKH9C/k_a_t_client.c">
 			<Option target="POS_sem"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.eCeO3x4NnW/k_a_t_client.h">
+		<Unit filename="/tmp/tmp.ybJcPHKH9C/k_a_t_client.h">
 			<Option target="POS_sem"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.eCeO3x4NnW/k_a_t_definitions.c">
+		<Unit filename="/tmp/tmp.ybJcPHKH9C/k_a_t_definitions.c">
 			<Option target="POS_sem"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.eCeO3x4NnW/k_a_t_definitions.h">
+		<Unit filename="/tmp/tmp.ybJcPHKH9C/k_a_t_definitions.h">
 			<Option target="POS_sem"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.eCeO3x4NnW/k_a_t_server.c">
+		<Unit filename="/tmp/tmp.ybJcPHKH9C/k_a_t_server.c">
 			<Option target="POS_sem"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.eCeO3x4NnW/k_a_t_server.h">
+		<Unit filename="/tmp/tmp.ybJcPHKH9C/k_a_t_server.h">
 			<Option target="POS_sem"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.eCeO3x4NnW/main.c">
+		<Unit filename="/tmp/tmp.ybJcPHKH9C/main.c">
 			<Option target="POS_sem"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.eCeO3x4NnW/CMakeLists.txt">
+		<Unit filename="/tmp/tmp.ybJcPHKH9C/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

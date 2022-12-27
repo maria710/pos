@@ -7,9 +7,9 @@ Preklad klienta:
 	gcc k_a_t_definitions.c k_a_t_client.c -o k_a_t_client -pthread
 
 Spustenie servera:
-	./k_a_t_server 10000 server
+	./k_a_t_server server 10000 hracVymysli
 Spustenie klienta:
-	./k_a_t_client localhost 10000 klient
+	./k_a_t_client client localhost 10000 hracHada
 	
 Ukoncenie aplikacie:
-	klient alebo server zada spravu ":end"
+	klient alebo server zada spravu "koniec"
