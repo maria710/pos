@@ -10,9 +10,6 @@
 #include <unistd.h>
 #include <pthread.h>
 
-
-//TODO ak už uhadnem nejake pismenko tak už sa neháda znova
-
 int pridajPismenkoAkUzHadal(char array[], char c) {
     int i;
     for (i = 0; array[i] != '\0'; i++) {
