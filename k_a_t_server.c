@@ -11,6 +11,20 @@
 #include <pthread.h>
 
 
+//TODO ak už uhadnem nejake pismenko tak už sa neháda znova
+
+int pridajPismenkoAkUzHadal(char array[], char c) {
+    int i;
+    for (i = 0; array[i] != '\0'; i++) {
+        if (array[i] == c) {
+            return 1;  // uz hadal dane pismenko
+        }
+    }
+    array[i] = c;  // pridame pismenko na koniec pola
+    array[i + 1] = '\0';
+    return 0;
+}
+
 void *serverHra(void *data) {
 
     DATA *d = (DATA *) data;
@@ -40,6 +54,8 @@ void *serverHra(void *data) {
     char buffer[2];
     int pocetUhadnutych = 0;
 
+    char hadanePismena[100];
+
     while(1 == 1) {
         int uhadol = 0;
         bzero(buffer, sizeof(buffer));
@@ -47,24 +63,32 @@ void *serverHra(void *data) {
         read(d->socket, buffer, sizeof(buffer));
         printf("Hrac zadal pismenko: %c ", buffer[0]);
 
-        for (int i = 0; i < dlzkaSlova; ++i) {
-            if(slovo[i] == buffer[0]) {
-                hadaneSlovo[i] = buffer[0];
-                uhadol = 1;
-                pocetUhadnutych++;
-            }
-        }
-        if(uhadol == 1) {
-            printf(", pismenko sa v slove NACHADZA.      ");
+        int hadane = pridajPismenkoAkUzHadal(hadanePismena, buffer[0]);
+
+        if(hadane == 1) {
+            printf(", pismenko uz bolo hadane.           ");
+
         } else {
-            printf(", pismenko sa v slove NENACHADZA.    ");
+            for (int i = 0; i < dlzkaSlova; ++i) {
+                if (slovo[i] == buffer[0]) {
+                    hadaneSlovo[i] = buffer[0];
+                    uhadol = 1;
+                    pocetUhadnutych++;
+                }
+            }
+
+            if(uhadol == 0) {
+                pocetZivotov--;
+            }
+
+            if (uhadol == 1) {
+                printf(", pismenko sa v slove NACHADZA.      ");
+            } else {
+                printf(", pismenko sa v slove NENACHADZA.    ");
+            }
         }
         printf("Pocet uhadnutych: %d\n", pocetUhadnutych);
         write(d->socket, hadaneSlovo, sizeof(hadaneSlovo)); // odoslanie klientovi
-
-        if(uhadol == 0) {
-            pocetZivotov--;
-        }
 
         write(d->socket, &pocetZivotov, sizeof(pocetZivotov));
 
