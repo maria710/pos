@@ -85,8 +85,6 @@ void nakresliObesenca(int zivoty) {
                    "|\n"
                    "------------------\n");
             break;
-        case -1 :
-            break;
     }
 }
 

@@ -153,6 +153,10 @@ int server(int argc, char *argv[]) {
     //pockame na skoncenie zapisovacieho vlakna <pthread.h>
     pthread_join(thread, NULL);
 
+    printf("\n**************************************************************************\n");
+    printf("HRA OBESENEC SKONČILA\n");
+    printf("**************************************************************************\n\n");
+
     //uzavretie socketu klienta <unistd.h>
     close(clientSocket);
 
