@@ -91,6 +91,7 @@ void *serverHra(void *data) {
 
         if(pocetUhadnutych == dlzkaSlova) {
             printf("Uhadol cele slovo! Prehral si.\n");
+            break;
         }
 
         if(pocetZivotov <= 0 ) {
@@ -151,7 +152,6 @@ int server(int argc, char *argv[]) {
 
     //pockame na skoncenie zapisovacieho vlakna <pthread.h>
     pthread_join(thread, NULL);
-    data_destroy(&data);
 
     //uzavretie socketu klienta <unistd.h>
     close(clientSocket);

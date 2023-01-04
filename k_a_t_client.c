@@ -11,6 +11,12 @@
 #include <unistd.h>
 #include <pthread.h>
 
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t vykresliObesenca = PTHREAD_COND_INITIALIZER;
+pthread_cond_t vykreslilSomObesenca = PTHREAD_COND_INITIALIZER;
+int pocetZivotov;
+int koniec;
+
 void nakresliObesenca(int zivoty) {
     switch (zivoty) {
         case 0:
@@ -79,12 +85,24 @@ void nakresliObesenca(int zivoty) {
                    "|\n"
                    "------------------\n");
             break;
+        case -1 :
+            break;
     }
 }
 
-void * clientHra(void * data) {
+void *obesenec() {
+    while (koniec != 1) {
+        pthread_mutex_lock(&mutex);
+        pthread_cond_wait(&vykresliObesenca, &mutex);
+        nakresliObesenca(pocetZivotov);
+        pthread_mutex_unlock(&mutex);
+        pthread_cond_signal(&vykreslilSomObesenca);
+    }
+}
 
-    DATA *d = (DATA * )data;
+void *clientHra(void *data) {
+
+    DATA *d = (DATA *) data;
 
     printf("\n**************************************************************************\n");
     printf("HRA OBESENEC ZAČALA! DRUHÝ HRÁČ VYMÝŠĽA SLOVO, KTORÉ MÁŠ HÁDAŤ\n");
@@ -97,7 +115,6 @@ void * clientHra(void * data) {
     printf("Dlzka slova je %d", dlzkaSlova);
 
     char hadaneSlovo[dlzkaSlova];
-    int pocetZivotov;
 
     read(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
 
@@ -106,38 +123,45 @@ void * clientHra(void * data) {
         bzero(buffer, sizeof(buffer));
         char pismenko;
         printf("\n\n");
-        int koniec = 1;
+        koniec = 1;
 
         for (int i = 0; i < sizeof(hadaneSlovo); ++i) {
-            if(hadaneSlovo[i] == '_') {
+            if (hadaneSlovo[i] == '_') {
                 koniec = 0;
             }
             printf("%c", hadaneSlovo[i]);
         }
         printf("\n");
 
-        if(koniec == 1) {
-            printf("Vyhral si!\n");
+        if (koniec != 1) {
+
+            printf("\n");
+            printf("Zadaj jedno pismenko: ");
+            scanf(" %c", &pismenko);
+
+            buffer[0] = pismenko;
+            write(d->socket, buffer, sizeof(buffer));
+            read(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
+
+            read(d->socket, &pocetZivotov, sizeof(pocetZivotov));
+            printf("Pocet zivotov je: %d\n", pocetZivotov);
+
+            pthread_mutex_lock(&mutex);
+            pthread_cond_signal(&vykresliObesenca);
+            pthread_cond_wait(&vykreslilSomObesenca, &mutex);
+            pthread_mutex_unlock(&mutex);
+
+        } else {
+            printf("Vyhral si!\n\n");
             break;
         }
 
-        printf("\n");
-        printf("Zadaj jedno pismenko: ");
-        scanf(" %c", &pismenko);
-
-        buffer[0] = pismenko;
-        write(d->socket, buffer, sizeof(buffer));
-        read(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
-
-        read(d->socket, &pocetZivotov, sizeof (pocetZivotov));
-        printf("Pocet zivotov je: %d\n", pocetZivotov);
-        nakresliObesenca(pocetZivotov);
-
         if (pocetZivotov == 0) {
-            printf("Prehral si!\n");
+            printf("Prehral si!\n\n");
             break;
         }
     }
+    pthread_exit(NULL);
 }
 
 
@@ -145,48 +169,59 @@ int client(int argc, char *argv[]) {
     if (argc < 3) {
         printError("Klienta je nutne spustit s nasledujucimi argumentmi: adresa port pouzivatel.");
     }
-    
+
     //ziskanie adresy a portu servera <netdb.h>
     struct hostent *server = gethostbyname(argv[2]);
     if (server == NULL) {
         printError("Server neexistuje.");
     }
     int port = atoi(argv[3]);
-    
+
     //vytvorenie socketu <sys/socket.h>
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
-        printError("Chyba - socket.");        
+        printError("Chyba - socket.");
     }
-    
+
     //definovanie adresy servera <arpa/inet.h>, na aky server sa idem pripajat
     struct sockaddr_in serverAddress;
-    bzero((char *)&serverAddress, sizeof(serverAddress));
+    bzero((char *) &serverAddress, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;
-    bcopy((char *)server->h_addr, (char *)&serverAddress.sin_addr.s_addr, server->h_length);
+    bcopy((char *) server->h_addr, (char *) &serverAddress.sin_addr.s_addr, server->h_length);
     serverAddress.sin_port = htons(port);
 
-    if (connect(sock,(struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0) {
-        printError("Chyba - connect.");        
+    if (connect(sock, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) < 0) {
+        printError("Chyba - connect.");
     }
 
     //-------------------SPOJENIE NADVIAZANE------------------------
 
-	//inicializacia dat - socket
+    //inicializacia dat - socket
     DATA data = {
-           sock
+            sock
     };
 
-    //vytvorenie vlakna pre zapisovanie dat do socketu <pthread.h>
-    pthread_t thread;
-    pthread_create(&thread, NULL, &clientHra, &data);
 
-	//pockame na skoncenie zapisovacieho vlakna <pthread.h>
-	pthread_join(thread, NULL);
-	data_destroy(&data);
+    //vytvorenie vlakna pre zapisovanie dat do socketu <pthread.h>
+    pthread_t threadHra, threadObesenec;
+    pthread_create(&threadHra, NULL, &clientHra, &data);
+    pthread_create(&threadObesenec, NULL, &obesenec, NULL);
+
+
+    //pockame na skoncenie zapisovacieho vlakna <pthread.h>
+    pthread_join(threadHra, NULL);
+    pthread_cancel(threadObesenec);
+
+    printf("\n**************************************************************************\n");
+    printf("HRA OBESENEC SKONČILA\n");
+    printf("**************************************************************************\n\n");
+
+    pthread_cond_destroy(&vykreslilSomObesenca);
+    pthread_cond_destroy(&vykresliObesenca);
+    pthread_mutex_destroy(&mutex);
 
     //uzavretie socketu <unistd.h>
     close(sock);
-    
+
     return (EXIT_SUCCESS);
 }
