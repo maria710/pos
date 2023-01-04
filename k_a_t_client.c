@@ -107,10 +107,10 @@ void *clientHra(void *data) {
     printf("**************************************************************************\n\n");
 
     char buffer[2];
-
     int dlzkaSlova;
+
     read(d->socket, &dlzkaSlova, sizeof(dlzkaSlova));
-    printf("Dlzka slova je %d", dlzkaSlova);
+    printf("Dlzka slova je %d\n", dlzkaSlova);
 
     char hadaneSlovo[dlzkaSlova];
 
@@ -119,7 +119,7 @@ void *clientHra(void *data) {
     while (1 == 1) {
 
         bzero(buffer, sizeof(buffer));
-        char pismenko;
+        char pismenko[10];
         printf("\n\n");
         koniec = 1;
 
@@ -135,12 +135,12 @@ void *clientHra(void *data) {
 
             printf("\n");
             printf("Zadaj jedno pismenko: ");
-            scanf(" %c", &pismenko);
 
-            buffer[0] = pismenko;
+            fgets(pismenko, sizeof pismenko, stdin);
+
+            buffer[0] = pismenko[0];
             write(d->socket, buffer, sizeof(buffer));
             read(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
-
             read(d->socket, &pocetZivotov, sizeof(pocetZivotov));
             printf("Pocet zivotov je: %d\n", pocetZivotov);
 
@@ -192,19 +192,17 @@ int client(int argc, char *argv[]) {
         printError("Chyba - connect.");
     }
 
-    //-------------------SPOJENIE NADVIAZANE------------------------
+    //------------------------------------------
 
     //inicializacia dat - socket
     DATA data = {
             sock
     };
 
-
     //vytvorenie vlakna pre zapisovanie dat do socketu <pthread.h>
     pthread_t threadHra, threadObesenec;
     pthread_create(&threadHra, NULL, &clientHra, &data);
     pthread_create(&threadObesenec, NULL, &obesenec, NULL);
-
 
     //pockame na skoncenie zapisovacieho vlakna <pthread.h>
     pthread_join(threadHra, NULL);

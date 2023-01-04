@@ -32,13 +32,13 @@ void *serverHra(void *data) {
     printf("HRA OBESENEC ZAČALA! VYMYSLI SLOVO, KTORÉ BUDE TVOJ OPONENT HÁDAŤ! \n");
     printf("**************************************************************************\n\n");
 
-
     char slovo[20];
     printf("Vymyslené slovo: ");
     fgets(slovo, 20, stdin);
     printf("Tvoj oponent háda slovo: %s\n", slovo);
-    int dlzkaSlova = strlen(slovo) - 1; //dlzka slova - ukoncovaci znak
-    strtok(slovo, "\n"); // odstrani new line z konca slova
+
+    int dlzkaSlova = strlen(slovo) - 1;
+    strtok(slovo, "\n");
     printf("Dlzka slova je: %d\n", dlzkaSlova);
 
     char hadaneSlovo[dlzkaSlova];
@@ -47,10 +47,10 @@ void *serverHra(void *data) {
     }
 
     write(d->socket,&dlzkaSlova, sizeof(dlzkaSlova));
-    write(d->socket, hadaneSlovo, sizeof(hadaneSlovo)); // odoslanie klientovi
+    write(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
+
     char buffer[2];
     int pocetUhadnutych = 0;
-
     char hadanePismena[100];
 
     while(1 == 1) {
@@ -63,8 +63,7 @@ void *serverHra(void *data) {
         int hadane = pridajPismenkoAkUzHadal(hadanePismena, buffer[0]);
 
         if(hadane == 1) {
-            printf(", pismenko uz bolo hadane.           ");
-
+            printf(", pismenko uz bolo hadane. ");
         } else {
             for (int i = 0; i < dlzkaSlova; ++i) {
                 if (slovo[i] == buffer[0]) {
@@ -77,16 +76,15 @@ void *serverHra(void *data) {
             if(uhadol == 0) {
                 pocetZivotov--;
             }
-
             if (uhadol == 1) {
-                printf(", pismenko sa v slove NACHADZA.      ");
+                printf(", pismenko sa v slove NACHADZA.");
             } else {
-                printf(", pismenko sa v slove NENACHADZA.    ");
+                printf(", pismenko sa v slove NENACHADZA.");
             }
         }
         printf("Pocet uhadnutych: %d\n", pocetUhadnutych);
-        write(d->socket, hadaneSlovo, sizeof(hadaneSlovo)); // odoslanie klientovi
 
+        write(d->socket, hadaneSlovo, sizeof(hadaneSlovo));
         write(d->socket, &pocetZivotov, sizeof(pocetZivotov));
 
         if(pocetUhadnutych == dlzkaSlova) {
@@ -139,7 +137,7 @@ int server(int argc, char *argv[]) {
         printError("Chyba - accept.");
     }
 
-    //-------------------SPOJENIE NADVIAZANE------------------------
+    //------------------------------------------
 
     //inicializacia dat - socket
     DATA data = {
