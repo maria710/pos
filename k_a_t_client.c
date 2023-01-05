@@ -207,10 +207,12 @@ int client(int argc, char *argv[]) {
     //pockame na skoncenie zapisovacieho vlakna <pthread.h>
     pthread_join(threadHra, NULL);
     pthread_cancel(threadObesenec);
+    pthread_join(threadObesenec, NULL);
 
     printf("\n**************************************************************************\n");
     printf("HRA OBESENEC SKONČILA\n");
     printf("**************************************************************************\n\n");
+
 
     pthread_cond_destroy(&vykreslilSomObesenca);
     pthread_cond_destroy(&vykresliObesenca);

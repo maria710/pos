@@ -11,14 +11,15 @@
 #include <pthread.h>
 
 int pridajPismenkoAkUzHadal(char array[], char c) {
-    int i;
-    for (i = 0; array[i] != '\0'; i++) {
+    int j = 0;
+    for (int i = 0; array[i] != '\0'; i++) {
         if (array[i] == c) {
             return 1;  // uz hadal dane pismenko
         }
+        j = i;
     }
-    array[i] = c;  // pridame pismenko na koniec pola
-    array[i + 1] = '\0';
+    array[j] = c;  // pridame pismenko na koniec pola
+    array[j + 1] = '\0';
     return 0;
 }
 
@@ -37,8 +38,8 @@ void *serverHra(void *data) {
     fgets(slovo, 20, stdin);
     printf("Tvoj oponent háda slovo: %s\n", slovo);
 
-    int dlzkaSlova = strlen(slovo) - 1;
     strtok(slovo, "\n");
+    int dlzkaSlova = strlen(slovo);
     printf("Dlzka slova je: %d\n", dlzkaSlova);
 
     char hadaneSlovo[dlzkaSlova];
@@ -51,7 +52,7 @@ void *serverHra(void *data) {
 
     char buffer[2];
     int pocetUhadnutych = 0;
-    char hadanePismena[100];
+    char hadanePismena[100] = {};
 
     while(1 == 1) {
         int uhadol = 0;
@@ -60,7 +61,8 @@ void *serverHra(void *data) {
         read(d->socket, buffer, sizeof(buffer));
         printf("Hrac zadal pismenko: %c ", buffer[0]);
 
-        int hadane = pridajPismenkoAkUzHadal(hadanePismena, buffer[0]);
+        int hadane = 0;
+        hadane = pridajPismenkoAkUzHadal(hadanePismena, buffer[0]);
 
         if(hadane == 1) {
             printf(", pismenko uz bolo hadane. ");
@@ -75,11 +77,9 @@ void *serverHra(void *data) {
 
             if(uhadol == 0) {
                 pocetZivotov--;
-            }
-            if (uhadol == 1) {
-                printf(", pismenko sa v slove NACHADZA.");
-            } else {
                 printf(", pismenko sa v slove NENACHADZA.");
+            } else {
+                printf(", pismenko sa v slove NACHADZA.");
             }
         }
         printf("Pocet uhadnutych: %d\n", pocetUhadnutych);

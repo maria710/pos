@@ -7,6 +7,7 @@
 
 int server(int argc, char *argv[]);
 void *serverHra(void *data);
+int pridajPismenkoAkUzHadal(char array[], char c);
 
 
 #endif //POS_SEM_K_A_T_SERVER_H
