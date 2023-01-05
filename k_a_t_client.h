@@ -9,5 +9,6 @@
 int client(int argc, char *argv[]);
 void * clientHra(void * data);
 void nakresliObesenca(int zivoty);
+void *obesenec();
 
 #endif //POS_SEM_K_A_T_CLIENT_H
